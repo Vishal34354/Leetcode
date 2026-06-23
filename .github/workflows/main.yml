@@ -1,18 +1,16 @@
-name: Sync Leetcode
+name: Sync Leetcode Past History
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 8 * * 6"
+  workflow_dispatch: # Allows you to trigger this manually anytime
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Run Sync
+      - name: Run Historic Sync with Descriptions
         uses: joshcai/leetcode-sync@v1.5
         with:
           github-token: ${{ github.token }}
           leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
           leetcode-session: ${{ secrets.LEETCODE_SESSION }}
-          destination-folder: "solutions" # Groups everything neatly
+          verbose: true # CRITICAL: This forces the API to pull problem context/numbers
